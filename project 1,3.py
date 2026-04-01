@@ -53,3 +53,70 @@ for i in range(3):
              break
             print("Mês inválido. Digite um mês real.")
             continue
+   sexo_base = sexo.split()[0]
+
+        if sexo_base in sexo_masculino or sexo_base in sexo_feminino:
+           break
+        else:
+            print("Sexo invalido. Digite novamente.")
+
+    cidade = input("Cidade de residência?").strip()
+
+    ano_nas = int(input("Digite o seu ano de nascimento").strip())
+    while True:
+        mes_txt = input("Digite o seu mês de nascimento").strip().lower()
+
+        if mes_txt.isdigit():
+            mes_nas = int(mes_txt)
+            if 1 <= mes_nas <= 12:
+             break
+            print("Mês inválido. Digite um mês real.")
+            continue
+
+        if mes_txt in meses:
+            mes_nas = meses[mes_txt]
+            break
+
+        print("Mês inválido. Digite um mês real.")
+
+    dia_nas = int(input("Digite o dia de nascimento").strip())
+
+    idade = hoje.year - ano_nas - ((hoje.month, hoje.day) < (mes_nas, dia_nas))
+
+    if idade < 18:
+        print("Infelizmente, esse site é +18.")
+        print("(ACESSO NEGADO)")
+
+        exit()
+
+    cadastros.append({
+       "nome": nome,
+       "cidade": cidade,
+       "ano_nascimento": ano_nas,
+       "dia_nascimento": dia_nas,
+       "idade": idade,
+       "sexo": sexo_base
+    })
+
+
+    if sexo_base in sexo_masculino:
+        tratamento = "senhor"
+    else:
+        tratamento = "senhora"
+
+    print("Perfeito, o seu cadastro foi finalizado com sucesso, {} {}.".format(tratamento, nome))
+print()
+print("-" * 30)
+
+resposta = input("Deseja ver o conteúdo dos cadastros? ").strip().lower()
+
+if resposta in ["sim", "s", "positivo", "pode ser"]:
+    print(cadastros)
+    print()
+    print("Certo, conversa encerrada")
+
+else:
+    (print("Certo, conversa encerrada"))
+print()
+print("-" * 30)
+winsound.PlaySound("mp3xx1.wav", winsound.SND_FILENAME)
